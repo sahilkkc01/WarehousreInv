@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://YOUR_BACKEND_PUBLIC_IP:5002/api/$1"
+    }
+  ]
+}

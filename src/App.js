@@ -97,7 +97,7 @@ export default function WarehouseInvForm() {
     if (!validateForm()) return;
 
     try {
-      await axios.post("http://10.40.40.151:5002/api/warehouse/inv", {
+      await axios.post("/api/warehouse/inv", {
         ...formData,
         physicalLocation: formData.physicalLocation
       });
