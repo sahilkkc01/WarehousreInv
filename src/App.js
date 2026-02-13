@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function WarehouseInvForm() {
-  const [formData, setFormData] = useState({
-    warehouseType: "",
-    date: "",
-    crnNo: "",
-    shippingBill: "",
-    containerNo: "",
-    size: "",
-    physicalLocation: [""],
-    oldLocation: "",
-    noOfPackages: "",
-    area: ""
-  });
+ const [formData, setFormData] = useState({
+  warehouseType: "",
+  date: "",
+  crnNo: "",
+  shippingBill: "",
+  containerNo: "",
+  size: "",
+  physicalLocation: [""],
+  oldLocation: "",
+  noOfPackages: "",
+  area: "",
+  boe: "",
+  fclLcl: "",
+  destuffingDate: "",
+  commodityDescription: ""
+});
+
 
   const upperFields = [
     "warehouseType",
@@ -59,13 +64,15 @@ export default function WarehouseInvForm() {
 
 const validateForm = () => {
   const requiredFields = [
-    "warehouseType",
-    "date",
-    "shippingBill",
-    "size",
-    "noOfPackages",
-    "area"
-  ];
+  "warehouseType",
+  "date",
+  "shippingBill",
+  "size",
+  "noOfPackages",
+  "area",
+  "commodityDescription"
+];
+
 
   for (let field of requiredFields) {
     if (!formData[field] || formData[field].toString().trim() === "") {
@@ -103,18 +110,23 @@ const validateForm = () => {
 
       alert("Record Saved Successfully");
 
-      setFormData({
-        warehouseType: "",
-        date: "",
-        crnNo: "",
-        shippingBill: "",
-        containerNo: "",
-        size: "",
-        physicalLocation: [""],
-        oldLocation: "",
-        noOfPackages: "",
-        area: ""
-      });
+    setFormData({
+  warehouseType: "",
+  date: "",
+  crnNo: "",
+  shippingBill: "",
+  containerNo: "",
+  size: "",
+  physicalLocation: [""],
+  oldLocation: "",
+  noOfPackages: "",
+  area: "",
+  boe: "",
+  fclLcl: "",
+  destuffingDate: "",
+  commodityDescription: ""
+});
+
     } catch (err) {
       console.error(err);
       alert("Error saving record");
@@ -263,6 +275,56 @@ const validateForm = () => {
                 required
               />
             </div>
+
+        <div style={styles.formGroup}>
+  <label style={styles.label}>BOE</label>
+  <input
+    type="text"
+    name="boe"
+    value={formData.boe}
+    onChange={handleChange}
+    style={{...styles.input, textTransform: 'uppercase'}}
+    placeholder="Enter BOE (optional)"
+  />
+</div>
+<div style={styles.formGroup}>
+  <label style={styles.label}>FCL / LCL</label>
+  <select
+    name="fclLcl"
+    value={formData.fclLcl}
+    onChange={handleChange}
+    style={styles.select}
+  >
+    <option value="">-- Select --</option>
+    <option value="FCL">FCL</option>
+    <option value="LCL">LCL</option>
+  </select>
+</div>
+
+<div style={styles.formGroup}>
+  <label style={styles.label}>Destuffing Date</label>
+  <input
+    type="date"
+    name="destuffingDate"
+    value={formData.destuffingDate}
+    onChange={handleChange}
+    style={styles.input}
+  />
+</div>
+<div style={styles.formGroup}>
+  <label style={styles.label}>
+    Commodity Description <span style={styles.required}>*</span>
+  </label>
+  <input
+    type="text"
+    name="commodityDescription"
+    value={formData.commodityDescription}
+    onChange={handleChange}
+    style={{...styles.input, textTransform: 'uppercase'}}
+    placeholder="Enter commodity description"
+    required
+  />
+</div>
 
             {/* Old Location */}
             <div style={styles.formGroup}>
