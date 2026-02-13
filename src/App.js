@@ -57,40 +57,39 @@ export default function WarehouseInvForm() {
     }
   };
 
-  const validateForm = () => {
-    const requiredFields = [
-      "warehouseType",
-      "date",
-      "crnNo",
-      "shippingBill",
-      "containerNo",
-      "size",
-      "noOfPackages",
-      "area"
-    ];
+const validateForm = () => {
+  const requiredFields = [
+    "warehouseType",
+    "date",
+    "shippingBill",
+    "size",
+    "noOfPackages",
+    "area"
+  ];
 
-    for (let field of requiredFields) {
-      if (!formData[field] || formData[field].toString().trim() === "") {
-        alert("All required fields must be filled.");
-        return false;
-      }
-    }
-
-    if (!["EXPORT", "IMPORT"].includes(formData.warehouseType)) {
-      alert("Warehouse Type must be EXPORT or IMPORT.");
+  for (let field of requiredFields) {
+    if (!formData[field] || formData[field].toString().trim() === "") {
+      alert("All required fields must be filled.");
       return false;
     }
+  }
 
-    if (
-      formData.physicalLocation.length === 0 ||
-      formData.physicalLocation.some(val => !val.trim())
-    ) {
-      alert("Physical Location is mandatory.");
-      return false;
-    }
+  if (!["EXPORT", "IMPORT"].includes(formData.warehouseType)) {
+    alert("Warehouse Type must be EXPORT or IMPORT.");
+    return false;
+  }
 
-    return true;
-  };
+  if (
+    formData.physicalLocation.length === 0 ||
+    formData.physicalLocation.some(val => !val.trim())
+  ) {
+    alert("Physical Location is mandatory.");
+    return false;
+  }
+
+  return true;
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -168,7 +167,7 @@ export default function WarehouseInvForm() {
             {/* CRN No */}
             <div style={styles.formGroup}>
               <label style={styles.label}>
-                CRN No <span style={styles.required}>*</span>
+                CRN No 
               </label>
               <input
                 type="text"
@@ -177,7 +176,7 @@ export default function WarehouseInvForm() {
                 onChange={handleChange}
                 style={{...styles.input, textTransform: 'uppercase'}}
                 placeholder="Enter CRN number"
-                required
+                
               />
             </div>
 
@@ -200,7 +199,7 @@ export default function WarehouseInvForm() {
             {/* Container No */}
             <div style={styles.formGroup}>
               <label style={styles.label}>
-                Container No <span style={styles.required}>*</span>
+                Container No 
               </label>
               <input
                 type="text"
@@ -209,7 +208,7 @@ export default function WarehouseInvForm() {
                 onChange={handleChange}
                 style={{...styles.input, textTransform: 'uppercase'}}
                 placeholder="Enter container number"
-                required
+                
               />
             </div>
 
